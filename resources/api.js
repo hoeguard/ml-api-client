@@ -4,7 +4,7 @@ const routes = {
 	auth: '/auth',
 	login: '/auth/login',
 	user_read: '/user/read',
-	styletransfer: '/api/v1/styletransfer',
+	styleTransfer: '/api/v1/styletransfer',
 }
 
 let api = {}

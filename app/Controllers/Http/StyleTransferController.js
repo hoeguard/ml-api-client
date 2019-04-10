@@ -6,7 +6,7 @@ const to = use('App/Utilities/To')
 const commonResponse = use('App/Utilities/CommonResponse')
 
 // const Drive = use('Drive')
-const ml5 = use('ml5')
+const tf = use('@tensorflow/tfjs')
 
 class StlyeTransferController {
 	// --- Response Methods --- \\

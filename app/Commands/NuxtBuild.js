@@ -1,5 +1,6 @@
 'use strict'
 
+const Env = use('Env')
 const { Command } = use('@adonisjs/ace')
 const { Builder } = require('nuxt')
 
@@ -32,9 +33,13 @@ class NuxtBuild extends Command {
    * @param  {Object} options [description]
    */
 	async handle(args, options) {
-		const nuxt = use('Service/Nuxt')
-		this.info('Building nuxt.js application...')
-		await new Builder(nuxt).build()
+		if (Env.get('NUXT_RENDER', true)) {
+			const nuxt = use('Service/Nuxt')
+			this.info('Building nuxt.js application...')
+			await new Builder(nuxt).build()
+		} else {
+			return false
+		}
 	}
 }
 

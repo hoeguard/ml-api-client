@@ -13,6 +13,7 @@
 |
 */
 
+const Env = use('Env')
 const Route = use('Route')
 
 Route.post('/auth', 'AuthController.auth')
@@ -29,5 +30,6 @@ Route.group(() => {
 
 Route.get('/api/v1/styletransfer', 'StyleTransferController.index')
 
-
-Route.any('*', 'NuxtController.render')
+if (Env.get('NUXT_RENDER', true)) {
+	Route.any('*', 'NuxtController.render')
+}

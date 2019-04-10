@@ -6,24 +6,28 @@ v-container(grid-list-md text-xs-center)
 				v-card-title.headline Welcome {{ profile.first_name }} {{ profile.last_name }}!
 			v-card
 				.uniform
-					img#image.image.pa-2(
+					img#input.image.pa-2(
 						src="/puppy.jpg"
 					)
 				.uniform
-					img.image.pa-2(
+					img#preview.image.pa-2(
 						src="/udnie.jpg"
 					)
 				.uniform
-					img.image.pa-2(
+					img#output.image.pa-2(
+						v-if="src"
 						:src="src"
 					)
 			v-card-actions
 				v-spacer
 				v-btn(
-					color="primary"
 					flat
-					@click="styletransfer"
-				) Transfer
+					@click="serverStyleTransfer"
+				) Server Transfer
+				v-btn(
+					flat
+					@click="clientStyleTransfer"
+				) Client Transfer
 </template>
 
 <script>
@@ -32,42 +36,45 @@ import ml5 from 'ml5'
 import api from '~/api'
 
 export default {
+	data() {
+		return {
+			style: undefined,
+			src: undefined
+		}
+	},
 	computed: {
 		...mapState('user', [
 			'profile'
 		]),
 	},
-	data() {
-		return {
-			style: undefined,
-			src: '/puppy.jpg'
-		}
-	},
-	methods: {
-		// async styletransfer() {
-		// 	let params = {
-		// 		image: undefined,
-		// 		model_id: 1
-		// 	}
-
-		// 	let [err, res] = await api.styletransfer(params)
-				
-		// 	if (!err) console.log(res)
-		// 	else console.log(err)
-		// }
-		// https://github.com/ml5js/training-styletransfer
-		async styletransfer() {
-			let image = document.getElementById('image')
-	
-			await this.style.transfer(image, (err, result) => {
-				this.src = result.src
-			})
-		}
-	},
 	mounted() {
 		this.style = ml5.styleTransfer('/models/2', () => {
 			console.log('model loaded')
 		})
+	},
+	methods: {
+		clientStyleTransfer() {
+			let image
+
+			if (this.src) image = document.getElementById('output')
+			else image = document.getElementById('input')
+	
+			this.style.transfer(image, (err, result) => {
+				this.src = result.src
+			})
+		},
+		async serverStyleTransfer() {
+			let params = {
+				image: undefined,
+				model_id: 1
+			}
+
+			let [err, res] = await api.styleTransfer(params)
+				
+			if (!err) console.log(res)
+			else console.log(err)
+		}
+		// https://github.com/ml5js/training-styletransfer
 	}
 }
 </script>
