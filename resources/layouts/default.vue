@@ -24,7 +24,7 @@ v-app(dark)
 				v-list-tile-content
 					v-list-tile-title Logout
 	v-toolbar(app)
-		v-toolbar-title(class="white--text") Client
+		v-toolbar-title(class="white--text") ML5 Style Transferer
 		v-spacer
 		v-toolbar-side-icon(
 			class="white--text"

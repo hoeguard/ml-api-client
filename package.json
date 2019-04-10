@@ -30,6 +30,7 @@
 		"@adonisjs/websocket-client": "^1.0.9",
 		"@nuxtjs/axios": "^5.3.6",
 		"cross-env": "^5.2.0",
+		"ml5": "^0.2.3",
 		"mysql": "^2.16.0",
 		"nuxt": "^2.4.0",
 		"password-generator": "^2.2.0",

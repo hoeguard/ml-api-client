@@ -4,9 +4,7 @@ const routes = {
 	auth: '/auth',
 	login: '/auth/login',
 	user_read: '/user/read',
-	memberships_read: '/memberships/read',
-	users_read: '/users/read',
-	room_messages_read: '/room/readMessages'
+	styletransfer: '/api/v1/styletransfer',
 }
 
 let api = {}

@@ -27,5 +27,7 @@ Route.group(() => {
 .prefix('/user')
 .middleware(['auth'])
 
+Route.get('/api/v1/styletransfer', 'StyleTransferController.index')
+
 
 Route.any('*', 'NuxtController.render')
